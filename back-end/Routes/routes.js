@@ -16,5 +16,4 @@ router.post("/teacher/edit/:id", editTeacher)
 
 router.delete("/teacher/delete/:id", deleteTeacher)
 
-
 module.exports = router

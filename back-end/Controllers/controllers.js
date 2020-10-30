@@ -7,7 +7,7 @@ const mongoose = require("mongoose")
 const registration = async (req, res) => {
     const { error } = registerValidation(req.body);
     if (error) {
-        res.status(400).send(error.details[0].message);
+        return res.status(400).send(error.details[0].message);
     }
 
     const emailExists = await Admin.findOne({ email: req.body.email });
@@ -114,7 +114,6 @@ const getTeacherInfo = async (req, res) => {
         if (name) {
             search_params['name'] = name;
         }
-        console.log(search_params)
         let teachers = await Teacher.find(search_params)
         res.send(teachers)
     }
