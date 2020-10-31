@@ -50,7 +50,7 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
                                         <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828805.svg" alt="moreInfo" width="20px" />
                                     </div>
                                 </div>
-                                <p className="card-text">AGE : <b>{item.age}</b></p>
+                                <p className="card-text">Age : <b>{item.age}</b></p>
                                 <p className="card-text">NO. of Classes : <b>{item.classes.length}</b></p>
                             </div>
                         </div>

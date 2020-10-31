@@ -7,22 +7,37 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
     const [name, setName] = useState(data.name)
     const [gender, setGender] = useState(data.gender)
     const [age, setAge] = useState(data.age)
-    const classes = data.classes
+    let classes = data.classes
+    const [classesCount, setClassesCount] = useState(classes.length)
 
     const editing = () => {
         const obj = {
-            name, gender, age, classes
+            ...data, name, gender, age, classes
         }
-        console.log(obj)
         handleEdit({ obj })
         handleBack()
+    }
+
+    const handleAdd = (obj, index) => {
+        classes = classes.map((item, i) => i === index ? obj : item)
+        alert("class Added!")
+    }
+
+
+    const addClasses = () => {
+        let getClasses = []
+        for (let i = 0; i < classesCount; i++) {
+            console.log(classes[i], i)
+            getClasses.push(<div key={i}><Classes onSubmit={handleAdd} data={classes[i]} i={i} /></div>)
+        }
+        return getClasses
     }
 
     if (edit) {
         return (
             <div>
-                <div className={`p-5 ${style.form}`}>
-                    <h3 className="text-center text-info">Add Teachers Here</h3>
+                <div className={`${style.form}`}>
+                    <h3 className="text-center text-info">EditTeachers Here</h3>
                     <input className="form-control" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter Teacher Name" />
                     <select value={gender} onChange={e => setGender(e.target.value)} className="form-control">
                         <option value="">Gender</option>
@@ -31,9 +46,11 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
                     </select>
                     <input className="form-control" type="number" value={age} onChange={e => setAge(e.target.value)} placeholder="Enter Age" />
                     <h5 className="text-info">Classes</h5>
-
+                    {
+                        addClasses()
+                    }
                     <div className="row">
-                        <button className="col-4 btn btn-info">Add More Class</button>
+                        <button className="col-4 btn btn-info" onClick={() => { setClassesCount(classesCount + 1); classes.push({ grade: "", section: "", subject: "" }) }}>Add More Class</button>
                         <button className="col-4 btn btn-success" onClick={() => editing()}>Change</button>
                         <button className="col-4 btn btn-danger" onClick={() => setEdit(false)}>Cancel</button>
                     </div>
@@ -81,6 +98,31 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
                     <button className="col-4 btn btn-danger" onClick={() => handleDelete(data._id)}>Delete</button>
                 </div>
             </div>
+        </div>
+    )
+}
+
+function Classes({ onSubmit, data, i }) {
+
+    const [grade, setGrade] = useState(data.grade)
+    const [section, setSection] = useState(data.section)
+    const [subject, setSubject] = useState(data.subject)
+
+    const handleAdd = () => {
+        if (grade === "" || section === "" || subject === "") {
+            alert("No field should be empty")
+            return
+        }
+        let obj = { grade, section, subject }
+        onSubmit(obj, i)
+    }
+
+    return (
+        <div className={`px-5 ${style.classes}`}>
+            <input className="form-control" type="number" value={grade} onChange={e => setGrade(e.target.value)} placeholder="Grade" />
+            <input className="form-control" type="text" value={section} onChange={e => setSection(e.target.value)} placeholder="section" />
+            <input className="form-control" type="text" value={subject} onChange={e => setSubject(e.target.value)} placeholder="subject" />
+            <button className="btn btn-primary" onClick={handleAdd}>+</button>
         </div>
     )
 }
