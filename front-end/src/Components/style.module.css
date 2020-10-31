@@ -71,3 +71,18 @@ body{
 .classes > *{
     margin-bottom: 2%;
 }
+
+.cards{
+    width: 60%;
+    margin: 0% auto
+}
+
+@media (max-width : 900px){
+    .search, .login{
+        width: 80%;
+    }
+
+    .cards, .more, .form {
+        width: 90%;
+    }
+}

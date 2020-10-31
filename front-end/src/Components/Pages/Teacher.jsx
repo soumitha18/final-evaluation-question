@@ -76,8 +76,8 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
                 <div className="card-text h5">Gender : <b className="h3">{data.gender}</b></div>
                 <div className="card-text h5">Age : <b className="h3">{data.age}</b></div>
                 <div className="card-text row">
-                    <p className="col-2 h4">Classes : </p>
-                    <div className="col-10 text-center">
+                    <p className="col-12 col-md-2 col-lg-2 h4">Classes : </p>
+                    <div className="col-12 col-md-10 col-10 text-center">
                         <div className="card pt-3 bg-dark text-light">
                             <div className="row">
                                 <p className="col-3">Sl.No</p>

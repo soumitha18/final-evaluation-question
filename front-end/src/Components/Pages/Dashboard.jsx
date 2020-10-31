@@ -1,7 +1,7 @@
 import Axios from "axios"
 import React, { useEffect } from "react"
 import { useState } from "react"
-import Students from "./Students"
+import Teachers from "./Teachers"
 import style from "../style.module.css"
 import { Link } from "react-router-dom"
 
@@ -108,7 +108,7 @@ export default function DashBoard() {
                 </div>
                 <div className="col-10 col-lg-11">
                     <div className="pt-5 text-center text-danger">{err}</div>
-                    <Students data={data} handleDelete={handleDelete} handleEdit={handleEdit} search={search} setSearch={setSearch} handleSearch={handleSearch} page={page} setPage={setPage} totalPages={totalPages} />
+                    <Teachers data={data} handleDelete={handleDelete} handleEdit={handleEdit} search={search} setSearch={setSearch} handleSearch={handleSearch} page={page} setPage={setPage} totalPages={totalPages} />
                 </div>
             </div>
         </div >

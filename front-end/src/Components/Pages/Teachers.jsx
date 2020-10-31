@@ -34,10 +34,10 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
             <div className="px-5 row">
                 {
                     data && data.map(item => (
-                        <div key={item._id} className="card my-3" style={{ width: "60%", margin: "0% auto" }}>
+                        <div key={item._id} className={`card my-3 ${style.cards}`}>
                             <div className="card-body">
                                 <div className="row">
-                                    <div className="col-2">
+                                    <div className="col-12 col-md-3 col-lg-2">
                                         {
                                             item.gender === "male" ?
                                                 <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784488.svg" width="100px" alt={item.name} />
@@ -45,7 +45,7 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
                                                 <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784518.svg" alt={item.name} width="100px" />
                                         }
                                     </div>
-                                    <div className="col-8">
+                                    <div className="col-12 col-md-7 col-lg-8">
                                         <h5>{item.name} {
                                             item.gender === "male" ?
                                                 <img src="https://www.flaticon.com/svg/static/icons/svg/758/758174.svg" alt="male" width="20px" />
