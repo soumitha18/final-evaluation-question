@@ -11,7 +11,7 @@ export default function AddTeacher() {
     const [name, setName] = useState("")
     const [gender, setGender] = useState("")
     const userData = JSON.parse(localStorage.getItem("activeUserDetails")) || []
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState("")
 
     const handleCancel = () => {
         history.push("/dashboard")
@@ -72,7 +72,7 @@ export default function AddTeacher() {
 
 function Classes({ onSubmit, key }) {
 
-    const [grade, setGrade] = useState(0)
+    const [grade, setGrade] = useState("")
     const [section, setSection] = useState("")
     const [subject, setSubject] = useState("")
 

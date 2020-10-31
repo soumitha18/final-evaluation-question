@@ -3,18 +3,17 @@ import style from "../style.module.css"
 
 export default function Teacher({ data, handleDelete, handleEdit, handleBack }) {
 
-    const [obj, setObj] = useState(data)
     const [edit, setEdit] = useState(false)
+    const [name, setName] = useState(data.name)
+    const [gender, setGender] = useState(data.gender)
+    const [age, setAge] = useState(data.age)
+    const classes = data.classes
 
     const editing = () => {
         const obj = {
-            _id: "5f9c6decf4dbe141ff0dd0e6",
-            classes: [],
-            school_id: "5f9bc75b14e79841a9d2d8a1",
-            name: "Hari",
-            gender: "male",
-            age: 20
+            name, gender, age, classes
         }
+        console.log(obj)
         handleEdit({ obj })
         handleBack()
     }
@@ -22,10 +21,22 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
     if (edit) {
         return (
             <div>
+                <div className={`p-5 ${style.form}`}>
+                    <h3 className="text-center text-info">Add Teachers Here</h3>
+                    <input className="form-control" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter Teacher Name" />
+                    <select value={gender} onChange={e => setGender(e.target.value)} className="form-control">
+                        <option value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <input className="form-control" type="number" value={age} onChange={e => setAge(e.target.value)} placeholder="Enter Age" />
+                    <h5 className="text-info">Classes</h5>
 
-                <div>
-                    <button className="btn btn-danger" onClick={() => setEdit(false)}>Back</button>
-                    <button className="btn btn-success" onClick={() => editing()}>Change</button>
+                    <div className="row">
+                        <button className="col-4 btn btn-info">Add More Class</button>
+                        <button className="col-4 btn btn-success" onClick={() => editing()}>Change</button>
+                        <button className="col-4 btn btn-danger" onClick={() => setEdit(false)}>Cancel</button>
+                    </div>
                 </div>
             </div>
         )
