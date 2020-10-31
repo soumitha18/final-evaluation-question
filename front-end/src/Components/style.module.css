@@ -54,3 +54,16 @@ body{
 .hoverDiv:hover .innerHoverDiv {
     display: block;
 }
+
+.form, .more{
+    width: 50%;
+    margin: 0% auto;
+}
+
+.form > *{
+    margin-bottom: 3%;
+}
+
+.classes > *{
+    margin-bottom: 2%;
+}
