@@ -109,13 +109,14 @@ const getTeachers = async (req, res) => {
 
 const getTeacherInfo = async (req, res) => {
     try {
-        const name = req.query.name
+        const name = req.query.name.toLowerCase()
         const search_params = { school_id: mongoose.Types.ObjectId(req.query.school_id) };
-        if (name) {
-            search_params['name'] = name;
-        }
+
         let teachers = await Teacher.find(search_params)
-        res.send(teachers)
+
+        let result = teachers.filter(item => item.name.toLowerCase().includes(name))
+
+        res.send(result)
     }
     catch (err) {
         res.status(400).send(err.message)

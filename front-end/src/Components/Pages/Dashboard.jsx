@@ -9,12 +9,16 @@ export default function DashBoard() {
 
     const [sort, setSort] = useState("")
     const [gender, setGender] = useState("")
-    const userData = JSON.parse(localStorage.getItem("activeUserDetails")) || []
+    const [userData, setUserData] = useState([])
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState("")
     const [data, setData] = useState([])
     const [totalPages, setTotalPages] = useState([])
     const [err, setErr] = useState("")
+
+    useEffect(() => {
+        setUserData(JSON.parse(localStorage.getItem("activeUserDetails")))
+    }, [])
 
     const handleSearch = () => {
         Axios.get(`http://localhost:5000/teacher?school_id=${userData.obj["_id"]}&name=${search}`)
@@ -63,18 +67,19 @@ export default function DashBoard() {
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:5000/teachers?school_id=${userData.obj["_id"]}&sort=${sort}&gender=${gender}&page=${page}`)
-            .then(res => {
-                setData([...res.data.teachers])
-                setPage(res.data.page)
-                let temp = []
-                for (let i = 1; i <= res.data.totalPages; i++) {
-                    temp.push(i)
-                }
-                setTotalPages(temp)
-            })
-            .catch(err => setErr(err.response.data))
-    }, [sort, gender, page])
+        if (userData.obj) {
+            Axios.get(`http://localhost:5000/teachers?school_id=${userData.obj["_id"]}&sort=${sort}&gender=${gender}&page=${page}`)
+                .then(res => {
+                    setData([...res.data.teachers])
+                    let temp = []
+                    for (let i = 1; i <= res.data.totalPages; i++) {
+                        temp.push(i)
+                    }
+                    setTotalPages(temp)
+                })
+                .catch(err => setErr(err.response.data))
+        }
+    }, [sort, gender, page, userData])
 
     return (
         <div>
