@@ -39,7 +39,7 @@ export default function Register() {
 
     return (
         <div className="mt-5">
-            <h2 className="mt-5 text-center">Register</h2>
+            <h2 className="mt-5 text-center text-info">Register</h2>
             <div className={`${style.login} mt-5`}>
                 <div>
                     <label className="sr-only">UserName</label>
@@ -77,7 +77,7 @@ export default function Register() {
                 <button className="my-3 py-2" onClick={handleSubmit}>Register</button>
                 <div className="text-center text-danger" >{err}</div>
                 <div className="text-center text-small"><small>Already have an account <Link to="/login">Here</Link></small></div>
-                </div>
             </div>
+        </div>
     )
 }

@@ -38,7 +38,7 @@ export default function Login() {
 
     return (
         <div className="mt-5">
-            <h2 className="mt-5 text-center">LOGIN</h2>
+            <h2 className="mt-5 text-center text-info">LOGIN</h2>
             <div className={`${style.login} mt-5`}>
                 <div>
                     <label className="sr-only">Email</label>

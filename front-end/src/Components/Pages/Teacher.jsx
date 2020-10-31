@@ -18,17 +18,15 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
         handleBack()
     }
 
-    const handleAdd = (obj, index) => {
+    const handleEditAdd = (obj, index) => {
         classes = classes.map((item, i) => i === index ? obj : item)
         alert("class Added!")
     }
 
-
     const addClasses = () => {
         let getClasses = []
         for (let i = 0; i < classesCount; i++) {
-            console.log(classes[i], i)
-            getClasses.push(<div key={i}><Classes onSubmit={handleAdd} data={classes[i]} i={i} /></div>)
+            getClasses.push(<div key={i}><Classes onSubmit={handleEditAdd} data={classes[i]} i={i} /></div>)
         }
         return getClasses
     }
@@ -51,7 +49,7 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
                     }
                     <div className="row">
                         <button className="col-4 btn btn-info" onClick={() => { setClassesCount(classesCount + 1); classes.push({ grade: "", section: "", subject: "" }) }}>Add More Class</button>
-                        <button className="col-4 btn btn-success" onClick={() => editing()}>Change</button>
+                        <button className="col-4 btn btn-success" onClick={() => editing()}>Update Change</button>
                         <button className="col-4 btn btn-danger" onClick={() => setEdit(false)}>Cancel</button>
                     </div>
                 </div>
@@ -62,7 +60,17 @@ export default function Teacher({ data, handleDelete, handleEdit, handleBack }) 
     return (
         <div className={`card ${style.more}`}>
             <div className="card-header">
-                <h2>{data.name}'s Information</h2>
+                <div className="row">
+                    <h2 className="col-10">{data.name}'s Information</h2>
+                    <div className="col-1">
+                        {
+                            data.gender === "male" ?
+                                <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784488.svg" width="50px" alt={data.name} />
+                                :
+                                <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784518.svg" alt={data.name} width="50px" />
+                        }
+                    </div>
+                </div>
             </div>
             <div className="card-body">
                 <div className="card-text h5">Gender : <b className="h3">{data.gender}</b></div>
@@ -108,7 +116,7 @@ function Classes({ onSubmit, data, i }) {
     const [section, setSection] = useState(data.section)
     const [subject, setSubject] = useState(data.subject)
 
-    const handleAdd = () => {
+    const handleEdit = () => {
         if (grade === "" || section === "" || subject === "") {
             alert("No field should be empty")
             return
@@ -122,7 +130,8 @@ function Classes({ onSubmit, data, i }) {
             <input className="form-control" type="number" value={grade} onChange={e => setGrade(e.target.value)} placeholder="Grade" />
             <input className="form-control" type="text" value={section} onChange={e => setSection(e.target.value)} placeholder="section" />
             <input className="form-control" type="text" value={subject} onChange={e => setSubject(e.target.value)} placeholder="subject" />
-            <button className="btn btn-primary" onClick={handleAdd}>+</button>
+            <button className="btn btn-primary" onClick={handleEdit}>update class</button>
+            <button className="btn btn-danger ml-3">Delete</button>
         </div>
     )
 }

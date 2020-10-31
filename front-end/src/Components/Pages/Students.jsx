@@ -20,7 +20,7 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
 
     return (
         <div>
-            <div className={`my-3 ${style.search}`}>
+            <div className={`mb-3 ${style.search}`}>
                 <label className="sr-only">Password</label>
                 <div className="input-group">
                     <input type="text" value={search} onChange={e => setSearch(e.target.value)} className="form-control" placeholder="Search Teacher" />
@@ -37,12 +37,24 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
                         <div key={item._id} className="card my-3" style={{ width: "60%", margin: "0% auto" }}>
                             <div className="card-body">
                                 <div className="row">
-                                    <h5 className="col-10">{item.name} {
-                                        item.gender === "male" ?
-                                            <img src="https://www.flaticon.com/svg/static/icons/svg/758/758174.svg" alt="male" width="20px" />
-                                            :
-                                            <img src="https://www.flaticon.com/svg/static/icons/svg/949/949854.svg" alt="female" width="25px" />
-                                    }</h5>
+                                    <div className="col-2">
+                                        {
+                                            item.gender === "male" ?
+                                                <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784488.svg" width="100px" alt={item.name} />
+                                                :
+                                                <img className="rounded-circle" src="https://www.flaticon.com/svg/static/icons/svg/2784/2784518.svg" alt={item.name} width="100px" />
+                                        }
+                                    </div>
+                                    <div className="col-8">
+                                        <h5>{item.name} {
+                                            item.gender === "male" ?
+                                                <img src="https://www.flaticon.com/svg/static/icons/svg/758/758174.svg" alt="male" width="20px" />
+                                                :
+                                                <img src="https://www.flaticon.com/svg/static/icons/svg/949/949854.svg" alt="female" width="25px" />
+                                        }</h5>
+                                        <p className="card-text">Age : <b>{item.age}</b></p>
+                                        <p className="card-text">NO. of Classes : <b>{item.classes.length}</b></p>
+                                    </div>
                                     <div onClick={() => handleDelete(item._id)} className="col-1">
                                         <img src="https://www.flaticon.com/svg/static/icons/svg/2089/2089743.svg" alt="delete" width="20px" />
                                     </div>
@@ -50,8 +62,7 @@ export default function Students({ data, handleDelete, handleEdit, search, setSe
                                         <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828805.svg" alt="moreInfo" width="20px" />
                                     </div>
                                 </div>
-                                <p className="card-text">Age : <b>{item.age}</b></p>
-                                <p className="card-text">NO. of Classes : <b>{item.classes.length}</b></p>
+
                             </div>
                         </div>
                     ))
