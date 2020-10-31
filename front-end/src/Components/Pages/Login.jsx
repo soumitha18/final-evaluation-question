@@ -1,8 +1,9 @@
 import React from "react"
 import { useState } from "react"
-import { useHistory } from "react-router"
+import { Redirect, useHistory } from "react-router"
 import style from "../style.module.css"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 export default function Login() {
     const [email, setEmail] = useState("")
@@ -10,15 +11,29 @@ export default function Login() {
     const [err, setErr] = useState("")
     const history = useHistory()
 
+    const userData = JSON.parse(localStorage.getItem("activeUserDetails")) || []
+
     const handleSubmit = () => {
         setErr("")
         let obj = { email, password }
         axios.post("http://localhost:5000/login", obj)
             .then(res => {
+                const data = {
+                    active: true,
+                    obj: res.data
+                }
+                savingData(data);
                 history.push("/dashboard")
-                console.log(res)
             })
             .catch(err => setErr(err.response.data))
+    }
+
+    const savingData = (data) => {
+        localStorage.setItem("activeUserDetails", JSON.stringify(data));
+    };
+
+    if (userData.active) {
+        return <Redirect to="/dashboard"></Redirect>;
     }
 
     return (
@@ -49,6 +64,7 @@ export default function Login() {
                 </div>
                 <button className="my-3 py-2" onClick={handleSubmit}>Login</button>
                 <div className="text-center text-danger" >{err}</div>
+                <div className="text-center text-small"><small>Create an account <Link to="/register">Here</Link></small></div>
             </div>
         </div>
     )

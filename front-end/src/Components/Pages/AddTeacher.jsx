@@ -10,8 +10,8 @@ export default function AddTeacher() {
     const [classData, setClassData] = useState([])
     const [name, setName] = useState("")
     const [gender, setGender] = useState("")
+    const userData = JSON.parse(localStorage.getItem("activeUserDetails")) || []
     const [age, setAge] = useState(0)
-    const [school_id, setSchool_id] = useState("5f9bc75b14e79841a9d2d8a1")
 
     const handleCancel = () => {
         history.push("/dashboard")
@@ -27,7 +27,7 @@ export default function AddTeacher() {
             name,
             gender,
             age,
-            school_id,
+            school_id: userData.obj["_id"],
             classes: [...classData]
         }
         Axios.post("http://localhost:5000/teacher", obj)

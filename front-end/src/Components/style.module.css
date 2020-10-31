@@ -6,6 +6,10 @@
     color: white;
 }
 
+.navigation > div>div> *{
+    color: white;
+}
+
 body{
     background-color: whitesmoke;
 }

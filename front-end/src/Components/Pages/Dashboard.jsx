@@ -9,15 +9,15 @@ export default function DashBoard() {
 
     const [sort, setSort] = useState("")
     const [gender, setGender] = useState("")
+    const userData = JSON.parse(localStorage.getItem("activeUserDetails")) || []
     const [page, setPage] = useState(1)
-    const [school_id, setSchool_id] = useState("")
     const [search, setSearch] = useState("")
     const [data, setData] = useState([])
     const [totalPages, setTotalPages] = useState([])
     const [err, setErr] = useState("")
 
     const handleSearch = () => {
-        Axios.get(`http://localhost:5000/teacher?school_id=5f9bc75b14e79841a9d2d8a1&name=${search}`)
+        Axios.get(`http://localhost:5000/teacher?school_id=${userData.obj["_id"]}&name=${search}`)
             .then(res => {
                 if (res.data.length === 0) {
                     setErr(`No Teacher by name ${search}`)
@@ -49,7 +49,7 @@ export default function DashBoard() {
     }
 
     const fetching = () => {
-        Axios.get(`http://localhost:5000/teachers?school_id=5f9bc75b14e79841a9d2d8a1&sort=${sort}&gender=${gender}&page=${page}`)
+        Axios.get(`http://localhost:5000/teachers?school_id=${userData.obj["_id"]}&sort=${sort}&gender=${gender}&page=${page}`)
             .then(res => {
                 setData([...res.data.teachers])
                 setPage(res.data.page)
@@ -63,7 +63,7 @@ export default function DashBoard() {
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:5000/teachers?school_id=5f9bc75b14e79841a9d2d8a1&sort=${sort}&gender=${gender}&page=${page}`)
+        Axios.get(`http://localhost:5000/teachers?school_id=${userData.obj["_id"]}&sort=${sort}&gender=${gender}&page=${page}`)
             .then(res => {
                 setData([...res.data.teachers])
                 setPage(res.data.page)
